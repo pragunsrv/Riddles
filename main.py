@@ -15,7 +15,9 @@ riddles = {
     "You see me once in June, twice in November, but not at all in May. What am I?": "e",
     "I’m not alive, but I can grow; I don’t have lungs, but I need air. What am I?": "fire",
     "The more you take, the more you leave behind. What am I?": "footsteps",
-    "What has one eye but can’t see?": "needle"
+    "What has one eye but can’t see?": "needle",
+    "What has a head, a tail, is brown, and has no legs?": "penny",
+    "What comes once in a minute, twice in a moment, but never in a thousand years?": "m"
 }
 
 high_scores = []
@@ -48,13 +50,19 @@ def view_scores():
     else:
         print("No scores yet. Play the game to record your score!")
 
+def reset_scores():
+    global high_scores
+    high_scores = []
+    print("Scores have been reset.")
+
 def main_menu():
     print("Welcome to the Riddles Game!")
     while True:
         print("1. Play Game")
         print("2. View Scores")
         print("3. Reset Scores")
-        print("4. Quit")
+        print("4. Settings")
+        print("5. Quit")
         choice = input("Choose an option: ").strip()
         if choice == "1":
             play_game()
@@ -63,79 +71,127 @@ def main_menu():
         elif choice == "3":
             reset_scores()
         elif choice == "4":
+            settings_menu()
+        elif choice == "5":
             print("Goodbye!")
             break
         else:
             print("Invalid choice, please try again.")
 
-def reset_scores():
-    global high_scores
-    high_scores = []
-    print("Scores have been reset.")
+def settings_menu():
+    print("Settings:")
+    print("1. Change Difficulty")
+    print("2. Toggle Hints")
+    print("3. Back to Main Menu")
+    choice = input("Choose an option: ").strip()
+    if choice == "1":
+        change_difficulty()
+    elif choice == "2":
+        toggle_hints()
+    elif choice == "3":
+        return
+    else:
+        print("Invalid choice, please try again.")
+
+def change_difficulty():
+    print("Change Difficulty:")
+    print("1. Easy (3 Rounds)")
+    print("2. Medium (5 Rounds)")
+    print("3. Hard (7 Rounds)")
+    choice = input("Choose a difficulty: ").strip()
+    if choice == "1":
+        rounds = 3
+    elif choice == "2":
+        rounds = 5
+    elif choice == "3":
+        rounds = 7
+    else:
+        print("Invalid choice, setting to Medium (5 Rounds)")
+        rounds = 5
+    print(f"Difficulty set to {rounds} Rounds")
+
+def toggle_hints():
+    global hints_enabled
+    hints_enabled = not hints_enabled
+    status = "enabled" if hints_enabled else "disabled"
+    print(f"Hints have been {status}")
+
+hints_enabled = False
+
+def get_hint(answer):
+    if hints_enabled:
+        return f"Hint: The answer starts with '{answer[0]}' and ends with '{answer[-1]}'"
+    return "Hints are disabled."
 
 if __name__ == "__main__":
     main_menu()
 
 # Extending the code with additional functions
-def extra_functionality_21():
-    squares = {x: x ** 2 for x in range(1, 51)}
-    cubes = {x: x ** 3 for x in range(1, 51)}
-    return squares, cubes
+def extra_functionality_31():
+    prime_list = [2]
+    for num in range(3, 101):
+        is_prime = all(num % prime != 0 for prime in prime_list)
+        if is_prime:
+            prime_list.append(num)
+    return prime_list
 
-def extra_functionality_22():
-    phrase = "to be or not to be"
-    word_freq = {word: phrase.split().count(word) for word in phrase.split()}
-    most_common = max(word_freq, key=word_freq.get)
-    return word_freq, most_common
+def extra_functionality_32():
+    list_a = [random.randint(1, 100) for _ in range(50)]
+    list_b = [random.randint(1, 100) for _ in range(50)]
+    intersection = list(set(list_a) & set(list_b))
+    union = list(set(list_a) | set(list_b))
+    difference = list(set(list_a) - set(list_b))
+    return intersection, union, difference
 
-def extra_functionality_23():
-    coordinates = [(random.randint(1, 100), random.randint(1, 100)) for _ in range(100)]
-    distances = [((x ** 2 + y ** 2) ** 0.5) for x, y in coordinates]
-    max_distance = max(distances)
-    min_distance = min(distances)
-    return max_distance, min_distance
+def extra_functionality_33():
+    sentence = "Another test sentence for version five."
+    word_lengths = {word: len(word) for word in sentence.split()}
+    total_length = sum(word_lengths.values())
+    avg_length = total_length / len(word_lengths)
+    return word_lengths, total_length, avg_length
 
-def extra_functionality_24():
-    fib_sequence = [0, 1]
-    for i in range(2, 101):
-        fib_sequence.append(fib_sequence[-1] + fib_sequence[-2])
-    sum_fibs = sum(fib_sequence)
-    max_fib = max(fib_sequence)
-    return sum_fibs, max_fib
+def extra_functionality_34():
+    matrix_a = [[random.randint(0, 10) for _ in range(3)] for _ in range(3)]
+    matrix_b = [[random.randint(0, 10) for _ in range(3)] for _ in range(3)]
+    matrix_sum = [[matrix_a[i][j] + matrix_b[i][j] for j in range(3)] for i in range(3)]
+    matrix_product = [[sum(a * b for a, b in zip(matrix_a_row, matrix_b_col)) for matrix_b_col in zip(*matrix_b)] for matrix_a_row in matrix_a]
+    return matrix_sum, matrix_product
 
-def extra_functionality_25():
-    letters = "abcdefghijklmnopqrstuvwxyz"
-    random_string = ''.join(random.choice(letters) for _ in range(100))
-    letter_freq = {letter: random_string.count(letter) for letter in letters}
-    most_freq_letter = max(letter_freq, key=letter_freq.get)
-    return random_string, letter_freq, most_freq_letter
+def extra_functionality_35():
+    vowel_count = {vowel: random.randint(1, 20) for vowel in "aeiou"}
+    consonant_count = {consonant: random.randint(1, 20) for consonant in "bcdfghjklmnpqrstvwxyz"}
+    total_vowels = sum(vowel_count.values())
+    total_consonants = sum(consonant_count.values())
+    return vowel_count, consonant_count, total_vowels, total_consonants
 
-def extra_functionality_26():
-    matrix = [[random.randint(0, 100) for _ in range(5)] for _ in range(5)]
-    transpose = [[matrix[j][i] for j in range(5)] for i in range(5)]
-    diagonal_sum = sum(matrix[i][i] for i in range(5))
-    return transpose, diagonal_sum
+def extra_functionality_36():
+    angles = [random.randint(1, 180) for _ in range(50)]
+    sin_values = [round(math.sin(math.radians(angle)), 2) for angle in angles]
+    cos_values = [round(math.cos(math.radians(angle)), 2) for angle in angles]
+    return angles, sin_values, cos_values
 
-def extra_functionality_27():
-    num_list = [random.randint(1, 200) for _ in range(200)]
-    num_list.sort()
-    median = num_list[len(num_list) // 2]
-    average = sum(num_list) / len(num_list)
-    return median, average
+def extra_functionality_37():
+    number = 987654321
+    digit_sum = sum(int(digit) for digit in str(number))
+    reversed_number = int(str(number)[::-1])
+    return digit_sum, reversed_number
 
-def extra_functionality_28():
-    string = "versionfourtesting"
-    reversed_string = string[::-1]
-    uppercase_string = string.upper()
-    return reversed_string, uppercase_string
+def extra_functionality_38():
+    shopping_list = ["milk", "eggs", "bread", "butter"]
+    prices = {item: random.uniform(1.0, 5.0) for item in shopping_list}
+    total_cost = sum(prices.values())
+    most_expensive = max(prices, key=prices.get)
+    return prices, total_cost, most_expensive
 
-def extra_functionality_29():
-    prices = [random.uniform(1.0, 100.0) for _ in range(50)]
-    total_cost = sum(prices)
-    avg_price = total_cost / len(prices)
-    return total_cost, avg_price
+def extra_functionality_39():
+    temperatures = [random.uniform(-30.0, 50.0) for _ in range(365)]
+    avg_temp = sum(temperatures) / len(temperatures)
+    max_temp = max(temperatures)
+    min_temp = min(temperatures)
+    return avg_temp, max_temp, min_temp
 
-def extra_functionality_30():
-    x_vals = list(range(1, 101))
-    y_vals = [x ** 2 + 3 * x + 5 for x in x_vals]
-    return x_vals, y_vals
+def extra_functionality_40():
+    binary_list = [bin(random.randint(0, 255))[2:].zfill(8) for _ in range(20)]
+    ones_count = [binary.count('1') for binary in binary_list]
+    zeros_count = [binary.count('0') for binary in binary_list]
+    return binary_list, ones_count, zeros_count
