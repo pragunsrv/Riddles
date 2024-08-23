@@ -22,26 +22,24 @@ riddles = {
     "What is full of holes but still holds water?": "sponge",
     "What has to be broken before you can use it?": "egg",
     "What has cities, but no houses; forests, but no trees; and rivers, but no water?": "map",
-    "What is always in front of you but can’t be seen?": "future",
     "What gets wetter the more it dries?": "towel",
     "What is so fragile that saying its name breaks it?": "silence",
+    "What has many keys but can’t open a single door?": "piano",
+    "What is always coming but never arrives?": "tomorrow",
+    "What can be cracked, made, told, and played?": "joke",
     "What has one eye but can’t see?": "needle",
-    "The more you have of it, the less you see. What is it?": "darkness",
-    "What can run but never walks, has a mouth but never talks, has a head but never weeps, has a bed but never sleeps?": "river",
+    "What has teeth but cannot bite?": "comb",
+    "What has a neck but no head?": "bottle",
+    "What is so delicate that even mentioning it breaks it?": "silence",
     "What has a head, a tail, is brown, and has no legs?": "penny",
-    "What comes once in a minute, twice in a moment, but never in a thousand years?": "m",
     "What can you catch but not throw?": "cold",
     "What has hands but can’t clap?": "clock",
-    "What has a neck but no head?": "bottle",
-    "What has holes but can hold liquid?": "sponge",
-    "What has teeth but cannot bite?": "comb",
-    "What can be cracked, made, told, and played?": "joke",
-    "What is so delicate that even mentioning it breaks it?": "silence",
     "What has many keys but can’t open a single door?": "piano",
-    "What is always coming but never arrives?": "tomorrow"
+    "What can travel around the world while staying in a corner?": "stamp"
 }
 
 high_scores = []
+game_history = []
 
 def play_game():
     score = 0
@@ -65,6 +63,7 @@ def play_game():
     else:
         print("Better luck next time!")
     high_scores.append(score)
+    game_history.append({'score': score, 'timestamp': datetime.now()})
 
 def view_scores():
     if high_scores:
@@ -79,16 +78,25 @@ def reset_scores():
     high_scores = []
     print("Scores have been reset.")
 
+def view_game_history():
+    if game_history:
+        print("Game History:")
+        for record in game_history:
+            print(f"Score: {record['score']}, Date: {record['timestamp']}")
+    else:
+        print("No game history available.")
+
 def main_menu():
     print("Welcome to the Riddles Game!")
     while True:
         print("1. Play Game")
         print("2. View Scores")
         print("3. Reset Scores")
-        print("4. Settings")
-        print("5. Extra Features")
-        print("6. Stats")
-        print("7. Quit")
+        print("4. View Game History")
+        print("5. Settings")
+        print("6. Extra Features")
+        print("7. Stats")
+        print("8. Quit")
         choice = input("Choose an option: ").strip()
         if choice == "1":
             play_game()
@@ -97,12 +105,14 @@ def main_menu():
         elif choice == "3":
             reset_scores()
         elif choice == "4":
-            settings_menu()
+            view_game_history()
         elif choice == "5":
-            extra_features_menu()
+            settings_menu()
         elif choice == "6":
-            stats_menu()
+            extra_features_menu()
         elif choice == "7":
+            stats_menu()
+        elif choice == "8":
             print("Goodbye!")
             break
         else:
@@ -155,7 +165,51 @@ def get_hint(answer):
     if hints_enabled:
         return f"Hint: The answer starts with '{answer[0]}' and ends with '{answer[-1]}'"
     return "Hints are disabled."
+def generate_sudoku_():
+    print("Generating Sudoku puzzle...")
+    # Placeholder for Sudoku puzzle generation logic
 
+def generate_crossword_():
+    print("Generating Crossword puzzle...")
+    # Placeholder for Crossword puzzle generation logic
+
+def generate_logic_grid_():
+    print("Generating Logic Grid puzzle...")
+    # Placeholder for Logic Grid puzzle generation logic
+
+def stats_menu_():
+    print("Game Statistics:")
+    print("1. Riddle Statistics")
+    print("2. Game Performance")
+    print("3. Game History")
+    print("4. Back to Main Menu")
+    choice = input("Choose an option: ").strip()
+    if choice == "1":
+        riddle_statistics()
+    elif choice == "2":
+        game_performance()
+    elif choice == "3":
+        view_game_history()
+    elif choice == "4":
+        return
+    else:
+        print("Invalid choice, please try again.")
+
+def riddle_statistics_():
+    print("Riddle Statistics:")
+    total_riddles = len(riddles)
+    print(f"Total Riddles: {total_riddles}")
+    if total_riddles > 0:
+        correct_answers = sum(1 for riddle in riddles.values() if riddle in riddles.values())
+        print(f"Total Correct Answers: {correct_answers}")
+
+def game_performance_():
+    print("Game Performance:")
+    if high_scores:
+        average_score = sum(high_scores) / len(high_scores)
+        print(f"Average Score: {average_score:.2f}")
+    else:
+        print("No performance data available.")
 def customize_game():
     print("Customize Game:")
     print("1. Add Riddles")
@@ -257,6 +311,7 @@ def math_number_games():
     print("1. Random Math Quiz")
     print("2. Number Guessing Game")
     print("3. Prime Number Checker")
+    print("4. Back to Extra Features Menu")
     choice = input("Choose an option: ").strip()
     if choice == "1":
         random_math_quiz()
@@ -264,6 +319,8 @@ def math_number_games():
         number_guessing_game()
     elif choice == "3":
         prime_number_checker()
+    elif choice == "4":
+        return
     else:
         print("Invalid choice, please try again.")
 
@@ -317,6 +374,7 @@ def logic_puzzle_generators():
     print("1. Generate Sudoku Puzzle")
     print("2. Generate Crossword Puzzle")
     print("3. Generate Logic Grid Puzzle")
+    print("4. Back to Extra Features Menu")
     choice = input("Choose an option: ").strip()
     if choice == "1":
         generate_sudoku()
@@ -324,6 +382,8 @@ def logic_puzzle_generators():
         generate_crossword()
     elif choice == "3":
         generate_logic_grid()
+    elif choice == "4":
+        return
     else:
         print("Invalid choice, please try again.")
 
@@ -343,13 +403,16 @@ def stats_menu():
     print("Game Statistics:")
     print("1. Riddle Statistics")
     print("2. Game Performance")
-    print("3. Back to Main Menu")
+    print("3. Game History")
+    print("4. Back to Main Menu")
     choice = input("Choose an option: ").strip()
     if choice == "1":
         riddle_statistics()
     elif choice == "2":
         game_performance()
     elif choice == "3":
+        view_game_history()
+    elif choice == "4":
         return
     else:
         print("Invalid choice, please try again.")
