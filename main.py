@@ -478,6 +478,101 @@ def game_performance():
         print(f"Average Score: {average_score:.2f}")
     else:
         print("No performance data available.")
+high_scores = []
+game_history = []
+user_preferences = {
+    "difficulty": "medium",
+    "hints_enabled": False,
+    "game_customization": {}
+}
+
+def play_game():
+    score = 0
+    num_riddles = get_num_riddles()
+    for _ in range(num_riddles):
+        riddle, answer = random.choice(list(riddles.items()))
+        print("Riddle: " + riddle)
+        user_answer = input("Your answer: ").strip().lower()
+        if user_answer == answer:
+            print("Correct!")
+            score += 1
+        else:
+            print("Wrong! The answer was: " + answer)
+        if user_preferences["hints_enabled"]:
+            hint = get_hint(answer)
+            print(hint)
+    print("Your final score is:", score, f"/ {num_riddles}")
+    if score == num_riddles:
+        print("Congratulations! You got a perfect score!")
+    elif score >= (num_riddles * 0.7):
+        print("Good job! You got most of them right.")
+    else:
+        print("Better luck next time!")
+    high_scores.append(score)
+    game_history.append({'score': score, 'timestamp': datetime.now()})
+
+def get_num_riddles():
+    difficulty = user_preferences["difficulty"]
+    if difficulty == "easy":
+        return 5
+    elif difficulty == "medium":
+        return 10
+    elif difficulty == "hard":
+        return 15
+    return 10
+
+def view_scores():
+    if high_scores:
+        print("High Scores:")
+        for i, score in enumerate(high_scores, start=1):
+            print(f"{i}. {score}/10")
+    else:
+        print("No scores yet. Play the game to record your score!")
+
+def reset_scores():
+    global high_scores
+    high_scores = []
+    print("Scores have been reset.")
+
+def view_game_history():
+    if game_history:
+        print("Game History:")
+        for record in game_history:
+            print(f"Score: {record['score']}, Date: {record['timestamp']}")
+    else:
+        print("No game history available.")
+
+def main_menu():
+    print("Welcome to the Riddles Game!")
+    while True:
+        print("1. Play Game")
+        print("2. View Scores")
+        print("3. Reset Scores")
+        print("4. View Game History")
+        print("5. Settings")
+        print("6. Extra Features")
+        print("7. Stats")
+        print("8. Quit")
+        choice = input("Choose an option: ").strip()
+        if choice == "1":
+            play_game()
+        elif choice == "2":
+            view_scores()
+        elif choice == "3":
+            reset_scores()
+        elif choice == "4":
+            view_game_history()
+        elif choice == "5":
+            settings_menu()
+        elif choice == "6":
+            extra_features_menu()
+        elif choice == "7":
+            stats_menu()
+        elif choice == "8":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice, please try again.")
 
 if __name__ == "__main__":
     main_menu()
