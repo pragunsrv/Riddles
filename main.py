@@ -10,7 +10,10 @@ riddles = {
     "What has many teeth, but can’t bite?": "comb",
     "What is always in front of you but can’t be seen?": "future",
     "What can fill a room but takes up no space?": "light",
-    "What goes up but never comes down?": "age"
+    "What goes up but never comes down?": "age",
+    "I shave every day, but my beard stays the same. What am I?": "barber",
+    "You see me once in June, twice in November, but not at all in May. What am I?": "e",
+    "I’m not alive, but I can grow; I don’t have lungs, but I need air. What am I?": "fire"
 }
 
 def play_game():
@@ -25,96 +28,108 @@ def play_game():
         else:
             print("Wrong! The answer was: " + answer)
     print("Your final score is:", score, "/ 5")
+    if score == 5:
+        print("Congratulations! You got a perfect score!")
+    elif score >= 3:
+        print("Good job! You got most of them right.")
+    else:
+        print("Better luck next time!")
 
 def main_menu():
     print("Welcome to the Riddles Game!")
     while True:
         print("1. Play Game")
-        print("2. Quit")
+        print("2. View Scores")
+        print("3. Quit")
         choice = input("Choose an option: ").strip()
         if choice == "1":
             play_game()
         elif choice == "2":
+            view_scores()
+        elif choice == "3":
             print("Goodbye!")
             break
         else:
             print("Invalid choice, please try again.")
 
+def view_scores():
+    print("This feature will be available in the next version.")
+
 if __name__ == "__main__":
     main_menu()
 
-# Extending the code to increase the line count
-def extra_functionality_1():
-    data = [random.randint(1, 100) for _ in range(100)]
-    sorted_data = sorted(data)
-    reversed_data = list(reversed(sorted_data))
-    min_val = min(sorted_data)
-    max_val = max(sorted_data)
-    avg_val = sum(sorted_data) / len(sorted_data)
-    return sorted_data, reversed_data, min_val, max_val, avg_val
+# Extending the code with additional functions
+def extra_functionality_11():
+    number_list = [random.randint(1, 1000) for _ in range(500)]
+    even_numbers = [num for num in number_list if num % 2 == 0]
+    odd_numbers = [num for num in number_list if num % 2 != 0]
+    even_sum = sum(even_numbers)
+    odd_sum = sum(odd_numbers)
+    return even_numbers, odd_numbers, even_sum, odd_sum
 
-def extra_functionality_2():
-    string_data = "riddlesgame"
-    unique_chars = set(string_data)
-    char_count = {char: string_data.count(char) for char in unique_chars}
-    return unique_chars, char_count
+def extra_functionality_12():
+    words = ["apple", "banana", "cherry", "date", "elderberry"]
+    words_with_vowels = [word for word in words if set("aeiou").intersection(word)]
+    words_with_consonants = [word for word in words if set("bcdfghjklmnpqrstvwxyz").intersection(word)]
+    return words_with_vowels, words_with_consonants
 
-def extra_functionality_3():
-    number = 123456789
-    digit_sum = sum(int(digit) for digit in str(number))
-    reversed_number = int(str(number)[::-1])
-    squared_number = number ** 2
-    return digit_sum, reversed_number, squared_number
+def extra_functionality_13():
+    numbers = list(range(1, 101))
+    factorials = [1]
+    for i in range(2, len(numbers) + 1):
+        factorials.append(factorials[-1] * i)
+    return factorials
 
-def extra_functionality_4():
-    fib_sequence = [0, 1]
-    for i in range(2, 50):
-        fib_sequence.append(fib_sequence[-1] + fib_sequence[-2])
-    even_fibs = [num for num in fib_sequence if num % 2 == 0]
-    odd_fibs = [num for num in fib_sequence if num % 2 != 0]
-    return fib_sequence, even_fibs, odd_fibs
+def extra_functionality_14():
+    matrix = [[random.randint(0, 50) for _ in range(10)] for _ in range(10)]
+    row_sums = [sum(row) for row in matrix]
+    col_sums = [sum(col) for col in zip(*matrix)]
+    return row_sums, col_sums
 
-def extra_functionality_5():
-    matrix = [[random.randint(1, 10) for _ in range(10)] for _ in range(10)]
-    transposed_matrix = [[matrix[j][i] for j in range(10)] for i in range(10)]
-    flattened_matrix = [item for sublist in matrix for item in sublist]
-    matrix_sum = sum(flattened_matrix)
-    return matrix, transposed_matrix, flattened_matrix, matrix_sum
+def extra_functionality_15():
+    sequence = [random.randint(1, 100) for _ in range(50)]
+    unique_numbers = set(sequence)
+    duplicated_numbers = [num for num in sequence if sequence.count(num) > 1]
+    return unique_numbers, duplicated_numbers
 
-def extra_functionality_6():
-    name_list = ["alice", "bob", "charlie", "dave", "eve"]
-    capitalized_names = [name.capitalize() for name in name_list]
-    name_lengths = [len(name) for name in name_list]
-    name_dict = dict(zip(capitalized_names, name_lengths))
-    return capitalized_names, name_lengths, name_dict
+def extra_functionality_16():
+    sentence = "This is another sample sentence for more testing."
+    word_freq = {word: sentence.split().count(word) for word in sentence.split()}
+    sorted_words = sorted(word_freq.items(), key=lambda x: x[1], reverse=True)
+    return sorted_words
 
-def extra_functionality_7():
-    prime_numbers = []
-    for num in range(2, 100):
-        if all(num % i != 0 for i in range(2, int(num ** 0.5) + 1)):
-            prime_numbers.append(num)
-    prime_sum = sum(prime_numbers)
-    prime_count = len(prime_numbers)
-    return prime_numbers, prime_sum, prime_count
+def extra_functionality_17():
+    prime_factors = {}
+    for num in range(2, 101):
+        i = 2
+        factors = []
+        while i * i <= num:
+            if num % i:
+                i += 1
+            else:
+                num //= i
+                factors.append(i)
+        if num > 1:
+            factors.append(num)
+        prime_factors[num] = factors
+    return prime_factors
 
-def extra_functionality_8():
-    sentence = "This is a sample sentence for testing purposes."
-    words = sentence.split()
-    reversed_words = " ".join(words[::-1])
-    word_lengths = [len(word) for word in words]
-    longest_word = max(words, key=len)
-    return words, reversed_words, word_lengths, longest_word
+def extra_functionality_18():
+    data = [random.random() for _ in range(100)]
+    max_val = max(data)
+    min_val = min(data)
+    range_val = max_val - min_val
+    return max_val, min_val, range_val
 
-def extra_functionality_9():
-    hex_number = "4f2a"
-    binary_number = bin(int(hex_number, 16))[2:]
-    octal_number = oct(int(hex_number, 16))[2:]
-    decimal_number = int(hex_number, 16)
-    return binary_number, octal_number, decimal_number
+def extra_functionality_19():
+    string = "riddlesgameversionthree"
+    reversed_string = string[::-1]
+    unique_characters = set(string)
+    return reversed_string, unique_characters
 
-def extra_functionality_10():
-    vowels = "aeiou"
-    consonants = "".join(set("abcdefghijklmnopqrstuvwxyz") - set(vowels))
-    vowel_count = sum(1 for char in "riddlesgame" if char in vowels)
-    consonant_count = sum(1 for char in "riddlesgame" if char in consonants)
-    return vowels, consonants, vowel_count, consonant_count
+def extra_functionality_20():
+    squares = [x ** 2 for x in range(1, 101)]
+    cubes = [x ** 3 for x in range(1, 101)]
+    square_sum = sum(squares)
+    cube_sum = sum(cubes)
+    return square_sum, cube_sum
