@@ -43,10 +43,30 @@ riddles = {
     "What is so delicate that even mentioning it breaks it?": "silence",
     "What has a head, a tail, is brown, and has no legs?": "penny",
     "What can you catch but not throw?": "cold",
-    "What has hands but can’t clap?": "clock"
+    "What has hands but can’t clap?": "clock",
+    "What is always in front of you but can’t be seen?": "future",
+    "What can fill a room but takes up no space?": "light",
+    "What goes up but never comes down?": "age",
+    "What can you catch but not throw?": "cold",
+    "What has hands but can’t clap?": "clock",
+    "What has many keys but can’t open a single door?": "piano",
+    "What has teeth but cannot bite?": "comb",
+    "What has a head but no body?": "coin",
+    "What can be broken but never held?": "promise",
+    "What has a neck but no head?": "bottle",
+    "What has many keys but can’t open a single door?": "piano",
+    "What can be cracked, made, told, and played?": "joke",
+    "What has one eye but can’t see?": "needle",
+    "What is full of holes but still holds water?": "sponge",
+    "What gets wetter the more it dries?": "towel",
+    "What has many keys but can’t open a single door?": "piano",
+    "What can travel around the world while staying in a corner?": "stamp",
+    "What has a heart that doesn’t beat?": "artichoke",
+    "What is always coming but never arrives?": "tomorrow",
+    "What can you catch but not throw?": "cold",
+    "What has hands but can’t clap?": "clock",
+    "What can fill a room but takes up no space?": "light"
 }
-
-high_scores = []
 game_history = []
 
 def play_game():
@@ -480,10 +500,16 @@ def game_performance():
         print("No performance data available.")
 high_scores = []
 game_history = []
+high_scores = []
+game_history = []
 user_preferences = {
     "difficulty": "medium",
     "hints_enabled": False,
-    "game_customization": {}
+    "game_customization": {
+        "background_color": "white",
+        "text_color": "black",
+        "font_size": 12
+    }
 }
 
 def play_game():
@@ -573,6 +599,202 @@ def main_menu():
             break
         else:
             print("Invalid choice, please try again.")
+
+def settings_menu():
+    print("Settings:")
+    print("1. Change Difficulty")
+    print("2. Toggle Hints")
+    print("3. Customize Game")
+    print("4. Back to Main Menu")
+    choice = input("Choose an option: ").strip()
+    if choice == "1":
+        change_difficulty()
+    elif choice == "2":
+        toggle_hints()
+    elif choice == "3":
+        customize_game()
+    elif choice == "4":
+        return
+    else:
+        print("Invalid choice, please try again.")
+
+def change_difficulty():
+    print("Change Difficulty:")
+    print("1. Easy (5 Rounds)")
+    print("2. Medium (10 Rounds)")
+    print("3. Hard (15 Rounds)")
+    choice = input("Choose a difficulty: ").strip()
+    if choice == "1":
+        user_preferences["difficulty"] = "easy"
+    elif choice == "2":
+        user_preferences["difficulty"] = "medium"
+    elif choice == "3":
+        user_preferences["difficulty"] = "hard"
+    else:
+        print("Invalid choice, please try again.")
+        return
+    print(f"Difficulty set to {user_preferences['difficulty']}.")
+
+def toggle_hints():
+    user_preferences["hints_enabled"] = not user_preferences["hints_enabled"]
+    status = "enabled" if user_preferences["hints_enabled"] else "disabled"
+    print(f"Hints {status}.")
+
+def customize_game():
+    print("Customize Game:")
+    print("1. Change Background Color")
+    print("2. Change Text Color")
+    print("3. Change Font Size")
+    print("4. Back to Settings Menu")
+    choice = input("Choose an option: ").strip()
+    if choice == "1":
+        color = input("Enter new background color: ").strip()
+        user_preferences["game_customization"]["background_color"] = color
+        print(f"Background color set to {color}.")
+    elif choice == "2":
+        color = input("Enter new text color: ").strip()
+        user_preferences["game_customization"]["text_color"] = color
+        print(f"Text color set to {color}.")
+    elif choice == "3":
+        try:
+            font_size = int(input("Enter new font size: ").strip())
+            user_preferences["game_customization"]["font_size"] = font_size
+            print(f"Font size set to {font_size}.")
+        except ValueError:
+            print("Invalid font size. Please enter a number.")
+    elif choice == "4":
+        return
+    else:
+        print("Invalid choice, please try again.")
+
+def extra_features_menu():
+    print("Extra Features:")
+    print("1. Riddle Generator")
+    print("2. Game Analysis")
+    print("3. Puzzle Creator")
+    print("4. Back to Main Menu")
+    choice = input("Choose an option: ").strip()
+    if choice == "1":
+        riddle_generator()
+    elif choice == "2":
+        game_analysis()
+    elif choice == "3":
+        puzzle_creator()
+    elif choice == "4":
+        return
+    else:
+        print("Invalid choice, please try again.")
+
+def riddle_generator():
+    print("Generating a new riddle...")
+    # Placeholder for riddle generation logic
+    new_riddle = input("Enter a new riddle: ").strip()
+    answer = input("Enter the answer: ").strip().lower()
+    riddles[new_riddle] = answer
+    print("New riddle added!")
+
+def game_analysis():
+    print("Analyzing game data...")
+    # Placeholder for game analysis logic
+    if high_scores:
+        avg_score = sum(high_scores) / len(high_scores)
+        print(f"Average Score: {avg_score:.2f}")
+    else:
+        print("No data available for analysis.")
+
+def puzzle_creator():
+    print("Creating a new puzzle...")
+    # Placeholder for puzzle creation logic
+    print("Puzzle creator is under development.")
+
+def stats_menu():
+    print("Game Statistics:")
+    print("1. Riddle Statistics")
+    print("2. Game Performance")
+    print("3. User Preferences")
+    print("4. Back to Main Menu")
+    choice = input("Choose an option: ").strip()
+    if choice == "1":
+        riddle_statistics()
+    elif choice == "2":
+        game_performance()
+    elif choice == "3":
+        view_user_preferences()
+    elif choice == "4":
+        return
+    else:
+        print("Invalid choice, please try again.")
+
+def riddle_statistics():
+    print("Riddle Statistics:")
+    total_riddles = len(riddles)
+    print(f"Total Riddles: {total_riddles}")
+    if total_riddles > 0:
+        correct_answers = sum(1 for riddle in riddles.values() if riddle in riddles.values())
+        print(f"Total Correct Answers: {correct_answers}")
+
+def game_performance():
+    print("Game Performance:")
+    if high_scores:
+        average_score = sum(high_scores) / len(high_scores)
+        print(f"Average Score: {average_score:.2f}")
+    else:
+        print("No performance data available.")
+
+def view_user_preferences():
+    print("User Preferences:")
+    for key, value in user_preferences.items():
+        print(f"{key}: {value}")
+
+def advanced_feature_1():
+    print("Advanced Feature 1:")
+    # Placeholder for advanced feature logic
+    print("This feature is under development.")
+
+def advanced_feature_2():
+    print("Advanced Feature 2:")
+    # Placeholder for advanced feature logic
+    print("This feature is under development.")
+
+def advanced_feature_3():
+    print("Advanced Feature 3:")
+    # Placeholder for advanced feature logic
+    print("This feature is under development.")
+
+def advanced_feature_4():
+    print("Advanced Feature 4:")
+    # Placeholder for advanced feature logic
+    print("This feature is under development.")
+
+def advanced_feature_5():
+    print("Advanced Feature 5:")
+    # Placeholder for advanced feature logic
+    print("This feature is under development.")
+
+def advanced_feature_6():
+    print("Advanced Feature 6:")
+    # Placeholder for advanced feature logic
+    print("This feature is under development.")
+
+def advanced_feature_7():
+    print("Advanced Feature 7:")
+    # Placeholder for advanced feature logic
+    print("This feature is under development.")
+
+def advanced_feature_8():
+    print("Advanced Feature 8:")
+    # Placeholder for advanced feature logic
+    print("This feature is under development.")
+
+def advanced_feature_9():
+    print("Advanced Feature 9:")
+    # Placeholder for advanced feature logic
+    print("This feature is under development.")
+
+def advanced_feature_10():
+    print("Advanced Feature 10:")
+    # Placeholder for advanced feature logic
+    print("This feature is under development.")
 
 if __name__ == "__main__":
     main_menu()
