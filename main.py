@@ -31,14 +31,21 @@ riddles = {
     "What has a head, a tail, is brown, and has no legs?": "penny",
     "What comes once in a minute, twice in a moment, but never in a thousand years?": "m",
     "What can you catch but not throw?": "cold",
-    "What has hands but can’t clap?": "clock"
+    "What has hands but can’t clap?": "clock",
+    "What has a neck but no head?": "bottle",
+    "What has holes but can hold liquid?": "sponge",
+    "What has teeth but cannot bite?": "comb",
+    "What can be cracked, made, told, and played?": "joke",
+    "What is so delicate that even mentioning it breaks it?": "silence",
+    "What has many keys but can’t open a single door?": "piano",
+    "What is always coming but never arrives?": "tomorrow"
 }
 
 high_scores = []
 
 def play_game():
     score = 0
-    for _ in range(5):
+    for _ in range(7):
         riddle, answer = random.choice(list(riddles.items()))
         print("Riddle: " + riddle)
         user_answer = input("Your answer: ").strip().lower()
@@ -50,10 +57,10 @@ def play_game():
         if hints_enabled:
             hint = get_hint(answer)
             print(hint)
-    print("Your final score is:", score, "/ 5")
-    if score == 5:
+    print("Your final score is:", score, "/ 7")
+    if score == 7:
         print("Congratulations! You got a perfect score!")
-    elif score >= 3:
+    elif score >= 5:
         print("Good job! You got most of them right.")
     else:
         print("Better luck next time!")
@@ -63,7 +70,7 @@ def view_scores():
     if high_scores:
         print("High Scores:")
         for i, score in enumerate(high_scores, start=1):
-            print(f"{i}. {score}/5")
+            print(f"{i}. {score}/7")
     else:
         print("No scores yet. Play the game to record your score!")
 
@@ -80,7 +87,8 @@ def main_menu():
         print("3. Reset Scores")
         print("4. Settings")
         print("5. Extra Features")
-        print("6. Quit")
+        print("6. Stats")
+        print("7. Quit")
         choice = input("Choose an option: ").strip()
         if choice == "1":
             play_game()
@@ -93,6 +101,8 @@ def main_menu():
         elif choice == "5":
             extra_features_menu()
         elif choice == "6":
+            stats_menu()
+        elif choice == "7":
             print("Goodbye!")
             break
         else:
@@ -209,11 +219,11 @@ def change_appearance():
     print("4. Back to Customize Game")
     choice = input("Choose an option: ").strip()
     if choice == "1":
-        print("Changing background color...")
+        print("Background color changed!")
     elif choice == "2":
-        print("Changing text color...")
+        print("Text color changed!")
     elif choice == "3":
-        print("Changing font size...")
+        print("Font size changed!")
     elif choice == "4":
         return
     else:
@@ -328,6 +338,37 @@ def generate_crossword():
 def generate_logic_grid():
     print("Generating Logic Grid puzzle...")
     # Placeholder for Logic Grid puzzle generation logic
+
+def stats_menu():
+    print("Game Statistics:")
+    print("1. Riddle Statistics")
+    print("2. Game Performance")
+    print("3. Back to Main Menu")
+    choice = input("Choose an option: ").strip()
+    if choice == "1":
+        riddle_statistics()
+    elif choice == "2":
+        game_performance()
+    elif choice == "3":
+        return
+    else:
+        print("Invalid choice, please try again.")
+
+def riddle_statistics():
+    print("Riddle Statistics:")
+    total_riddles = len(riddles)
+    print(f"Total Riddles: {total_riddles}")
+    if total_riddles > 0:
+        correct_answers = sum(1 for riddle in riddles.values() if riddle in riddles.values())
+        print(f"Total Correct Answers: {correct_answers}")
+
+def game_performance():
+    print("Game Performance:")
+    if high_scores:
+        average_score = sum(high_scores) / len(high_scores)
+        print(f"Average Score: {average_score:.2f}")
+    else:
+        print("No performance data available.")
 
 if __name__ == "__main__":
     main_menu()
