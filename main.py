@@ -79,7 +79,8 @@ def main_menu():
         print("2. View Scores")
         print("3. Reset Scores")
         print("4. Settings")
-        print("5. Quit")
+        print("5. Extra Features")
+        print("6. Quit")
         choice = input("Choose an option: ").strip()
         if choice == "1":
             play_game()
@@ -90,6 +91,8 @@ def main_menu():
         elif choice == "4":
             settings_menu()
         elif choice == "5":
+            extra_features_menu()
+        elif choice == "6":
             print("Goodbye!")
             break
         else:
@@ -216,54 +219,115 @@ def change_appearance():
     else:
         print("Invalid choice, please try again.")
 
+def extra_features_menu():
+    print("Extra Features:")
+    print("1. Advanced Riddle Analysis")
+    print("2. Math and Number Games")
+    print("3. Logic Puzzle Generators")
+    print("4. Back to Main Menu")
+    choice = input("Choose an option: ").strip()
+    if choice == "1":
+        advanced_riddle_analysis()
+    elif choice == "2":
+        math_number_games()
+    elif choice == "3":
+        logic_puzzle_generators()
+    elif choice == "4":
+        return
+    else:
+        print("Invalid choice, please try again.")
+
+def advanced_riddle_analysis():
+    print("Advanced Riddle Analysis:")
+    analysis = {riddle: len(answer) for riddle, answer in riddles.items()}
+    print("Riddle Analysis (length of answers):", analysis)
+
+def math_number_games():
+    print("Math and Number Games:")
+    print("1. Random Math Quiz")
+    print("2. Number Guessing Game")
+    print("3. Prime Number Checker")
+    choice = input("Choose an option: ").strip()
+    if choice == "1":
+        random_math_quiz()
+    elif choice == "2":
+        number_guessing_game()
+    elif choice == "3":
+        prime_number_checker()
+    else:
+        print("Invalid choice, please try again.")
+
+def random_math_quiz():
+    num1 = random.randint(1, 100)
+    num2 = random.randint(1, 100)
+    operation = random.choice(['+', '-', '*', '/'])
+    if operation == '+':
+        correct_answer = num1 + num2
+    elif operation == '-':
+        correct_answer = num1 - num2
+    elif operation == '*':
+        correct_answer = num1 * num2
+    elif operation == '/':
+        correct_answer = num1 / num2
+    print(f"Solve: {num1} {operation} {num2}")
+    user_answer = float(input("Your answer: ").strip())
+    if math.isclose(user_answer, correct_answer, rel_tol=1e-9):
+        print("Correct!")
+    else:
+        print("Wrong! The correct answer was:", correct_answer)
+
+def number_guessing_game():
+    number = random.randint(1, 100)
+    attempts = 0
+    while True:
+        guess = int(input("Guess the number (1-100): ").strip())
+        attempts += 1
+        if guess < number:
+            print("Too low!")
+        elif guess > number:
+            print("Too high!")
+        else:
+            print(f"Correct! The number was {number}. It took you {attempts} attempts.")
+            break
+
+def prime_number_checker():
+    num = int(input("Enter a number to check if it's prime: ").strip())
+    if num > 1:
+        for i in range(2, int(math.sqrt(num)) + 1):
+            if num % i == 0:
+                print(f"{num} is not a prime number.")
+                break
+        else:
+            print(f"{num} is a prime number.")
+    else:
+        print(f"{num} is not a prime number.")
+
+def logic_puzzle_generators():
+    print("Logic Puzzle Generators:")
+    print("1. Generate Sudoku Puzzle")
+    print("2. Generate Crossword Puzzle")
+    print("3. Generate Logic Grid Puzzle")
+    choice = input("Choose an option: ").strip()
+    if choice == "1":
+        generate_sudoku()
+    elif choice == "2":
+        generate_crossword()
+    elif choice == "3":
+        generate_logic_grid()
+    else:
+        print("Invalid choice, please try again.")
+
+def generate_sudoku():
+    print("Generating Sudoku puzzle...")
+    # Placeholder for Sudoku puzzle generation logic
+
+def generate_crossword():
+    print("Generating Crossword puzzle...")
+    # Placeholder for Crossword puzzle generation logic
+
+def generate_logic_grid():
+    print("Generating Logic Grid puzzle...")
+    # Placeholder for Logic Grid puzzle generation logic
+
 if __name__ == "__main__":
     main_menu()
-
-# Extending the code with additional functions
-def extra_functionality_41():
-    list_c = [random.randint(1, 200) for _ in range(100)]
-    even_numbers = [num for num in list_c if num % 2 == 0]
-    odd_numbers = [num for num in list_c if num % 2 != 0]
-    print("Extra functionality: even and odd numbers separated.")
-
-def extra_functionality_42():
-    x = random.randint(1, 100)
-    y = random.randint(1, 100)
-    print(f"Extra functionality: The product of {x} and {y} is {x * y}.")
-
-def extra_functionality_43():
-    text = "This is a sentence for analysis."
-    word_count = len(text.split())
-    letter_count = len([char for char in text if char.isalpha()])
-    print(f"Extra functionality: {word_count} words and {letter_count} letters in the sentence.")
-
-def extra_functionality_44():
-    words = ["alpha", "beta", "gamma", "delta"]
-    capitalized_words = [word.upper() for word in words]
-    print("Extra functionality: Words capitalized -", capitalized_words)
-
-def extra_functionality_45():
-    sequence = [random.randint(1, 10) for _ in range(10)]
-    doubled_sequence = [num * 2 for num in sequence]
-    print("Extra functionality: Sequence doubled -", doubled_sequence)
-
-def extra_functionality_46():
-    square_roots = [math.sqrt(i) for i in range(1, 21)]
-    print("Extra functionality: Square roots calculated -", square_roots)
-
-def extra_functionality_47():
-    even_numbers = [num for num in range(1, 100) if num % 2 == 0]
-    print("Extra functionality: Even numbers from 1 to 100 -", even_numbers)
-
-def extra_functionality_48():
-    matrix = [[random.randint(1, 10) for _ in range(3)] for _ in range(3)]
-    transposed = [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))]
-    print("Extra functionality: Matrix transposed -", transposed)
-
-def extra_functionality_49():
-    factors = {num: [i for i in range(1, num + 1) if num % i == 0] for num in range(1, 21)}
-    print("Extra functionality: Factors calculated -", factors)
-
-def extra_functionality_50():
-    factorial_values = {num: math.factorial(num) for num in range(1, 11)}
-    print("Extra functionality: Factorials calculated -", factorial_values)
