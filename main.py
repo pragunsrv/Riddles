@@ -1,5 +1,6 @@
 import random
 import math
+from datetime import datetime
 
 riddles = {
     "I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?": "echo",
@@ -35,7 +36,14 @@ riddles = {
     "What can you catch but not throw?": "cold",
     "What has hands but can’t clap?": "clock",
     "What has many keys but can’t open a single door?": "piano",
-    "What can travel around the world while staying in a corner?": "stamp"
+    "What can travel around the world while staying in a corner?": "stamp",
+    "What is full of holes but still holds water?": "sponge",
+    "What can be cracked, made, told, and played?": "joke",
+    "What has a neck but no head?": "bottle",
+    "What is so delicate that even mentioning it breaks it?": "silence",
+    "What has a head, a tail, is brown, and has no legs?": "penny",
+    "What can you catch but not throw?": "cold",
+    "What has hands but can’t clap?": "clock"
 }
 
 high_scores = []
@@ -43,7 +51,7 @@ game_history = []
 
 def play_game():
     score = 0
-    for _ in range(7):
+    for _ in range(10):  # Increased number of riddles per game
         riddle, answer = random.choice(list(riddles.items()))
         print("Riddle: " + riddle)
         user_answer = input("Your answer: ").strip().lower()
@@ -55,10 +63,10 @@ def play_game():
         if hints_enabled:
             hint = get_hint(answer)
             print(hint)
-    print("Your final score is:", score, "/ 7")
-    if score == 7:
+    print("Your final score is:", score, "/ 10")
+    if score == 10:
         print("Congratulations! You got a perfect score!")
-    elif score >= 5:
+    elif score >= 7:
         print("Good job! You got most of them right.")
     else:
         print("Better luck next time!")
@@ -69,7 +77,7 @@ def view_scores():
     if high_scores:
         print("High Scores:")
         for i, score in enumerate(high_scores, start=1):
-            print(f"{i}. {score}/7")
+            print(f"{i}. {score}/10")
     else:
         print("No scores yet. Play the game to record your score!")
 
@@ -138,19 +146,19 @@ def settings_menu():
 
 def change_difficulty():
     print("Change Difficulty:")
-    print("1. Easy (3 Rounds)")
-    print("2. Medium (5 Rounds)")
-    print("3. Hard (7 Rounds)")
+    print("1. Easy (5 Rounds)")
+    print("2. Medium (10 Rounds)")
+    print("3. Hard (15 Rounds)")
     choice = input("Choose a difficulty: ").strip()
     if choice == "1":
-        rounds = 3
+        rounds = 5
     elif choice == "2":
-        rounds = 5
+        rounds = 10
     elif choice == "3":
-        rounds = 7
+        rounds = 15
     else:
-        print("Invalid choice, setting to Medium (5 Rounds)")
-        rounds = 5
+        print("Invalid choice, setting to Medium (10 Rounds)")
+        rounds = 10
     print(f"Difficulty set to {rounds} Rounds")
 
 def toggle_hints():
@@ -257,20 +265,18 @@ def modify_riddles():
         if riddle.lower() == 'done':
             break
         if riddle in riddles:
-            new_riddle = input("Enter the new riddle text: ").strip()
             new_answer = input("Enter the new answer: ").strip().lower()
-            del riddles[riddle]
-            riddles[new_riddle] = new_answer
+            riddles[riddle] = new_answer
             print("Riddle modified!")
         else:
             print("Riddle not found!")
 
 def change_appearance():
     print("Change Appearance:")
-    print("1. Change Background Color")
-    print("2. Change Text Color")
-    print("3. Change Font Size")
-    print("4. Back to Customize Game")
+    print("1. Background Color")
+    print("2. Text Color")
+    print("3. Font Size")
+    print("4. Back to Customize Game Menu")
     choice = input("Choose an option: ").strip()
     if choice == "1":
         print("Background color changed!")
@@ -386,6 +392,46 @@ def logic_puzzle_generators():
         return
     else:
         print("Invalid choice, please try again.")
+def change_difficulty_():
+    print("Change Difficulty:")
+    print("1. Easy (3 Rounds)")
+    print("2. Medium (5 Rounds)")
+    print("3. Hard (7 Rounds)")
+    choice = input("Choose a difficulty: ").strip()
+    if choice == "1":
+        rounds = 3
+    elif choice == "2":
+        rounds = 5
+    elif choice == "3":
+        rounds = 7
+    else:
+        print("Invalid choice, setting to Medium (5 Rounds)")
+        rounds = 5
+    print(f"Difficulty set to {rounds} Rounds")
+
+def toggle_hints_():
+    global hints_enabled
+    hints_enabled = not hints_enabled
+    status = "enabled" if hints_enabled else "disabled"
+    print(f"Hints have been {status}")
+
+hints_enabled = False
+
+def get_hint_(answer):
+    if hints_enabled:
+        return f"Hint: The answer starts with '{answer[0]}' and ends with '{answer[-1]}'"
+    return "Hints are disabled."
+def generate_sudoku_():
+    print("Generating Sudoku puzzle...")
+    # Placeholder for Sudoku puzzle generation logic
+
+def generate_crossword_():
+    print("Generating Crossword puzzle...")
+    # Placeholder for Crossword puzzle generation logic
+
+def generate_logic_grid_():
+    print("Generating Logic Grid puzzle...")
+    # Placeholder for Logic Grid puzzle generation logic
 
 def generate_sudoku():
     print("Generating Sudoku puzzle...")
